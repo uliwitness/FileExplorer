@@ -1,0 +1,3 @@
+[submodule "UKFileWatcher"]
+	path = UKFileWatcher
+	url = https://uliwitness@github.com/uliwitness/UKFileWatcher.git
