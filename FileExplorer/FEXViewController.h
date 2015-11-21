@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FEXViewController.h
 //  FileExplorer
 //
 //  Created by Uli Kusterer on 21/11/15.
@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
+@interface FEXViewController : NSViewController
 
 
 @end

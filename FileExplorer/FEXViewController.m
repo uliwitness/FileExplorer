@@ -1,15 +1,18 @@
 //
-//  ViewController.m
+//  FEXViewController.m
 //  FileExplorer
 //
 //  Created by Uli Kusterer on 21/11/15.
 //  Copyright © 2015 Uli Kusterer. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "FEXViewController.h"
 #import "UKKQueue.h"
 
-@interface ViewController () <UKFileWatcherDelegate>
+@interface FEXViewController () <UKFileWatcherDelegate>
+{
+	NSString	*	_folderPath;
+}
 
 @property (strong) UKKQueue*				fileWatcher;
 @property (copy) NSString*					folderPath;
@@ -69,30 +72,78 @@
 	return _icon;
 }
 
+
+-(NSString*)	description
+{
+	return [NSString stringWithFormat: @"%@ <%p> \"%@\" { path = %@, icon = <%p> }", self.class, self, _displayName ? _displayName : _fileName, _filePath, _icon];
+}
+
 @end
 
 
-@implementation ViewController
+@implementation FEXViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
 	[super viewDidLoad];
 	
-	self.files = [NSMutableArray new];
+	if( !self.files )
+	{
+		self.files = [NSMutableArray new];
+		
+		self.fileWatcher = [UKKQueue new];
+		[self.fileWatcher setDelegate: self];
+	}
 	
-	self.fileWatcher = [UKKQueue new];
-	self.folderPath = [@"~/Downloads" stringByExpandingTildeInPath];
-	[self.fileWatcher addPath: self.folderPath];
-	[self.fileWatcher setDelegate: self];
-	
-	[self updateFileList];
+	if( !self.folderPath )
+	{
+		self.folderPath = [@"~" stringByExpandingTildeInPath];
+	}
 }
 
-- (void)setRepresentedObject:(id)representedObject {
+- (void)setRepresentedObject:(id)representedObject
+{
 	[super setRepresentedObject:representedObject];
-
-	// Update the view, if already loaded.
 	
-	[self updateFileList];
+	if( !self.files )
+	{
+		self.files = [NSMutableArray new];
+		
+		self.fileWatcher = [UKKQueue new];
+		[self.fileWatcher setDelegate: self];
+	}
+	
+	self.folderPath = [(FEXFileEntry*)representedObject filePath];
+}
+
+
+-(void)	setFolderPath: (NSString *)folderPath
+{
+	if( _folderPath )
+	{
+		[self.fileWatcher removePath: _folderPath];
+	}
+	_folderPath = folderPath;
+	[self.files removeAllObjects];
+	if( _folderPath )
+	{
+		[self.fileWatcher addPath: folderPath];
+		[self updateFileList];
+	}
+}
+
+
+-(NSString*)	folderPath
+{
+	return _folderPath;
+}
+
+
+-(IBAction)	rowDoubleClicked: (id)sender
+{
+	FEXViewController*	vc = [self.storyboard instantiateControllerWithIdentifier: @"FolderController"];
+	vc.representedObject = self.files[self.tableView.clickedRow];
+	self.view.window.contentViewController = vc;
 }
 
 
