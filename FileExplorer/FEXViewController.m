@@ -18,7 +18,7 @@
 #endif
 
 
-@interface FEXViewController () <UKFileWatcherDelegate>
+@interface FEXController () <UKFileWatcherDelegate>
 {
 	NSString	*	_folderPath;
 }
@@ -26,9 +26,16 @@
 @property (strong) id<UKFileWatcher>		fileWatcher;
 @property (copy) NSString*					folderPath;
 @property (strong) NSMutableArray*			files;
+
+@end
+
+
+@interface FEXViewController ()
+
 @property (strong) IBOutlet NSTableView*	tableView;
 
 @end
+
 
 
 
@@ -90,39 +97,19 @@
 @end
 
 
-@implementation FEXViewController
+@implementation FEXController
 
-- (void)viewDidLoad
+-(instancetype) init
 {
-	[super viewDidLoad];
-	
-	if( !self.files )
+	if( self = [super init])
 	{
-		self.files = [NSMutableArray new];
+		_files = [NSMutableArray new];
 		
-		self.fileWatcher = [FEXFileWatcherClass new];
-		[self.fileWatcher setDelegate: self];
+		_fileWatcher = [FEXFileWatcherClass new];
+		[_fileWatcher setDelegate: self];
 	}
 	
-	if( !self.folderPath )
-	{
-		self.folderPath = [@"~" stringByExpandingTildeInPath];
-	}
-}
-
-- (void)setRepresentedObject:(id)representedObject
-{
-	[super setRepresentedObject:representedObject];
-	
-	if( !self.files )
-	{
-		self.files = [NSMutableArray new];
-		
-		self.fileWatcher = [FEXFileWatcherClass new];
-		[self.fileWatcher setDelegate: self];
-	}
-	
-	self.folderPath = [(FEXFileEntry*)representedObject filePath];
+	return self;
 }
 
 
@@ -148,36 +135,22 @@
 }
 
 
--(IBAction)	rowDoubleClicked: (id)sender
-{
-	FEXViewController*	vc = [self.storyboard instantiateControllerWithIdentifier: @"FolderController"];
-	vc.representedObject = self.files[self.tableView.clickedRow];
-	self.view.window.contentViewController = vc;
-}
-
-
 -(void)	watcher:(id<UKFileWatcher>)kq receivedNotification:(NSString *)nm forPath:(NSString *)fpath
 {
 	[self updateFileList];
 }
 
 
-- (void)viewDidAppear
-{
-	self.view.window.representedFilename = self.folderPath;
-	self.view.window.title = [NSFileManager.defaultManager displayNameAtPath: self.folderPath];
-}
-
-
 -(void)	updateFileList
 {
-	self.view.window.representedFilename = self.folderPath;
-	self.view.window.title = self.title = [NSFileManager.defaultManager displayNameAtPath: self.folderPath];
+	BOOL delegateWantsAddMessages = [_delegate respondsToSelector: @selector(fileController:addedFile:)];
+	BOOL delegateWantsRemoveMessages = [_delegate respondsToSelector: @selector(fileController:removedFile:)];
 	
 	NSMutableArray	*	newFiles = [NSMutableArray new];
 	NSArray			*	filePaths = [NSFileManager.defaultManager contentsOfDirectoryAtPath: self.folderPath  error: NULL];
 	NSEnumerator	*	oldFileEnny = self.files.objectEnumerator;
 	FEXFileEntry	*	currOldFile = oldFileEnny.nextObject;
+	
 	for( NSString* currFile in filePaths )
 	{
 		if( [currFile hasPrefix: @"."] )
@@ -204,9 +177,14 @@
 			{
 				// Current higher than old file? Current is new, add it!
 				[newFiles addObject: [[FEXFileEntry alloc] initWithFilePath: currPath fileName: currFile]];
+				if( delegateWantsAddMessages )
+					[_delegate fileController: self addedFile: currPath];
 			}
 			else if( order == NSOrderedDescending )	// Current lower than old file? Old file got removed, don't take it along, but try current against next old file again.
 			{
+				if( delegateWantsRemoveMessages )
+					[_delegate fileController: self removedFile: currOldFile.fileName];
+				
 				currOldFile = oldFileEnny.nextObject;
 				retry = true;
 			}
@@ -214,6 +192,62 @@
 		while( retry );
 	}
 	self.files = newFiles;
+}
+
+@end
+
+
+@implementation FEXViewController
+
+- (void)viewDidLoad
+{
+	[super viewDidLoad];
+	
+	FEXController *fileController = [FEXController new];
+	fileController.delegate = self;
+	
+	if( !fileController.folderPath )
+	{
+		fileController.folderPath = [@"~" stringByExpandingTildeInPath];
+	}
+	self.fileController = fileController;
+}
+
+
+- (void)setRepresentedObject:(id)representedObject
+{
+	[super setRepresentedObject:representedObject];
+	
+	self.fileController.folderPath = [(FEXFileEntry*)representedObject filePath];
+}
+
+
+-(IBAction)	rowDoubleClicked: (id)sender
+{
+	FEXViewController*	vc = [self.storyboard instantiateControllerWithIdentifier: @"FolderController"];
+	vc.representedObject = self.fileController.files[self.tableView.clickedRow];
+	self.view.window.contentViewController = vc;
+}
+
+
+- (void)viewDidAppear
+{
+	self.view.window.representedFilename = self.fileController.folderPath;
+	self.view.window.title = [NSFileManager.defaultManager displayNameAtPath: self.fileController.folderPath];
+}
+
+
+-(void) fileController: (FEXController *)sender addedFile: (NSString *)inPath
+{
+	self.view.window.representedFilename = self.fileController.folderPath;
+	self.view.window.title = [NSFileManager.defaultManager displayNameAtPath: self.fileController.folderPath];
+}
+
+
+-(void) fileController: (FEXController *)sender removedFile: (NSString *)inPath
+{
+	self.view.window.representedFilename = self.fileController.folderPath;
+	self.view.window.title = [NSFileManager.defaultManager displayNameAtPath: self.fileController.folderPath];
 }
 
 @end

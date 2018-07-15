@@ -8,8 +8,29 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface FEXViewController : NSViewController
 
+@class FEXController;
+
+
+@protocol FEXControllerDelegate <NSObject>
+
+@optional
+-(void) fileController: (FEXController *)sender addedFile: (NSString *)inPath;
+-(void) fileController: (FEXController *)sender removedFile: (NSString *)inPath;
+
+@end
+
+
+@interface FEXController : NSObject
+
+@property (weak) id<FEXControllerDelegate> delegate;
+
+@end
+
+
+@interface FEXViewController : NSViewController <FEXControllerDelegate>
+
+@property FEXController *fileController;
 
 @end
 
