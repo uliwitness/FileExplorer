@@ -8,13 +8,22 @@
 
 #import "FEXViewController.h"
 #import "UKKQueue.h"
+#import "UKFSEventsWatcher.h"
+
+
+#if 0
+#define FEXFileWatcherClass	UKFSEventsWatcher
+#else
+#define FEXFileWatcherClass	UKKQueue
+#endif
+
 
 @interface FEXViewController () <UKFileWatcherDelegate>
 {
 	NSString	*	_folderPath;
 }
 
-@property (strong) UKKQueue*				fileWatcher;
+@property (strong) id<UKFileWatcher>		fileWatcher;
 @property (copy) NSString*					folderPath;
 @property (strong) NSMutableArray*			files;
 @property (strong) IBOutlet NSTableView*	tableView;
@@ -91,7 +100,7 @@
 	{
 		self.files = [NSMutableArray new];
 		
-		self.fileWatcher = [UKKQueue new];
+		self.fileWatcher = [FEXFileWatcherClass new];
 		[self.fileWatcher setDelegate: self];
 	}
 	
@@ -109,7 +118,7 @@
 	{
 		self.files = [NSMutableArray new];
 		
-		self.fileWatcher = [UKKQueue new];
+		self.fileWatcher = [FEXFileWatcherClass new];
 		[self.fileWatcher setDelegate: self];
 	}
 	
