@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5521089120FB8A5B002C5B09 /* UKFSEventsWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 5521088F20FB8A5B002C5B09 /* UKFSEventsWatcher.m */; };
 		55DD40AB1C00093700E35713 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40AA1C00093700E35713 /* AppDelegate.m */; };
 		55DD40AE1C00093700E35713 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40AD1C00093700E35713 /* main.m */; };
 		55DD40B11C00093700E35713 /* FEXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40B01C00093700E35713 /* FEXViewController.m */; };
 		55DD40B31C00093700E35713 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55DD40B21C00093700E35713 /* Assets.xcassets */; };
 		55DD40B61C00093700E35713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55DD40B41C00093700E35713 /* Main.storyboard */; };
-		55DD40C71C000B4600E35713 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40BE1C000B4500E35713 /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		55DD40C81C000B4600E35713 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C01C000B4500E35713 /* UKKQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		55DD40C71C000B4600E35713 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40BE1C000B4500E35713 /* UKFileWatcher.m */; };
+		55DD40C81C000B4600E35713 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C01C000B4500E35713 /* UKKQueue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5521088D20FB8A5A002C5B09 /* UKFSEventsWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKFSEventsWatcher.h; path = UKFileWatcher/UKFSEventsWatcher.h; sourceTree = SOURCE_ROOT; };
+		5521088F20FB8A5B002C5B09 /* UKFSEventsWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKFSEventsWatcher.m; path = UKFileWatcher/UKFSEventsWatcher.m; sourceTree = SOURCE_ROOT; };
 		55DD40A61C00093700E35713 /* FileExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DD40A91C00093700E35713 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55DD40AA1C00093700E35713 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				55DD40BE1C000B4500E35713 /* UKFileWatcher.m */,
 				55DD40BF1C000B4500E35713 /* UKKQueue.h */,
 				55DD40C01C000B4500E35713 /* UKKQueue.m */,
+				5521088D20FB8A5A002C5B09 /* UKFSEventsWatcher.h */,
+				5521088F20FB8A5B002C5B09 /* UKFSEventsWatcher.m */,
 			);
 			name = UKKQueue;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 				55DD40C71C000B4600E35713 /* UKFileWatcher.m in Sources */,
 				55DD40B11C00093700E35713 /* FEXViewController.m in Sources */,
 				55DD40AE1C00093700E35713 /* main.m in Sources */,
+				5521089120FB8A5B002C5B09 /* UKFSEventsWatcher.m in Sources */,
 				55DD40AB1C00093700E35713 /* AppDelegate.m in Sources */,
 				55DD40C81C000B4600E35713 /* UKKQueue.m in Sources */,
 			);
