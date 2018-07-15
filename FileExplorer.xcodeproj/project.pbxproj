@@ -14,9 +14,6 @@
 		55DD40B61C00093700E35713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55DD40B41C00093700E35713 /* Main.storyboard */; };
 		55DD40C71C000B4600E35713 /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40BE1C000B4500E35713 /* UKFileWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		55DD40C81C000B4600E35713 /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C01C000B4500E35713 /* UKKQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		55DD40C91C000B4600E35713 /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C21C000B4500E35713 /* UKMainThreadProxy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		55DD40CA1C000B4600E35713 /* UKPushbackMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C41C000B4600E35713 /* UKPushbackMessenger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		55DD40CB1C000B4600E35713 /* UKThreadMessenger.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DD40C61C000B4600E35713 /* UKThreadMessenger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,12 +30,6 @@
 		55DD40BE1C000B4500E35713 /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKFileWatcher.m; path = UKFileWatcher/UKFileWatcher.m; sourceTree = SOURCE_ROOT; };
 		55DD40BF1C000B4500E35713 /* UKKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKKQueue.h; path = UKFileWatcher/UKKQueue.h; sourceTree = SOURCE_ROOT; };
 		55DD40C01C000B4500E35713 /* UKKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKKQueue.m; path = UKFileWatcher/UKKQueue.m; sourceTree = SOURCE_ROOT; };
-		55DD40C11C000B4500E35713 /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKMainThreadProxy.h; path = UKFileWatcher/ULIProxies/UKMainThreadProxy.h; sourceTree = SOURCE_ROOT; };
-		55DD40C21C000B4500E35713 /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKMainThreadProxy.m; path = UKFileWatcher/ULIProxies/UKMainThreadProxy.m; sourceTree = SOURCE_ROOT; };
-		55DD40C31C000B4500E35713 /* UKPushbackMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKPushbackMessenger.h; path = UKFileWatcher/ULIProxies/UKPushbackMessenger.h; sourceTree = SOURCE_ROOT; };
-		55DD40C41C000B4600E35713 /* UKPushbackMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKPushbackMessenger.m; path = UKFileWatcher/ULIProxies/UKPushbackMessenger.m; sourceTree = SOURCE_ROOT; };
-		55DD40C51C000B4600E35713 /* UKThreadMessenger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UKThreadMessenger.h; path = UKFileWatcher/ULIProxies/UKThreadMessenger.h; sourceTree = SOURCE_ROOT; };
-		55DD40C61C000B4600E35713 /* UKThreadMessenger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UKThreadMessenger.m; path = UKFileWatcher/ULIProxies/UKThreadMessenger.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +90,6 @@
 				55DD40BE1C000B4500E35713 /* UKFileWatcher.m */,
 				55DD40BF1C000B4500E35713 /* UKKQueue.h */,
 				55DD40C01C000B4500E35713 /* UKKQueue.m */,
-				55DD40C11C000B4500E35713 /* UKMainThreadProxy.h */,
-				55DD40C21C000B4500E35713 /* UKMainThreadProxy.m */,
-				55DD40C31C000B4500E35713 /* UKPushbackMessenger.h */,
-				55DD40C41C000B4600E35713 /* UKPushbackMessenger.m */,
-				55DD40C51C000B4600E35713 /* UKThreadMessenger.h */,
-				55DD40C61C000B4600E35713 /* UKThreadMessenger.m */,
 			);
 			name = UKKQueue;
 			sourceTree = "<group>";
@@ -183,9 +168,6 @@
 				55DD40AE1C00093700E35713 /* main.m in Sources */,
 				55DD40AB1C00093700E35713 /* AppDelegate.m in Sources */,
 				55DD40C81C000B4600E35713 /* UKKQueue.m in Sources */,
-				55DD40CA1C000B4600E35713 /* UKPushbackMessenger.m in Sources */,
-				55DD40C91C000B4600E35713 /* UKMainThreadProxy.m in Sources */,
-				55DD40CB1C000B4600E35713 /* UKThreadMessenger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +307,7 @@
 				55DD40BC1C00093700E35713 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
